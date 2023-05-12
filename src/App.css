@@ -1,0 +1,284 @@
+/* Body */
+body {
+  width: 1340px;
+  height: 80px;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  margin: auto;
+}
+
+/* Select transit icon */
+.icon-color {
+  color: #1b31a8;
+}
+.icon-section {
+  margin-bottom: 10px;
+}
+
+
+/* Header */
+.header {
+  background: #ffffff;
+}
+.header-icon {
+  width: 160px;
+  height: 69px;
+  margin-left: 67px;
+}
+
+
+/* Layout Color */
+.layout {
+  background-color: #e5e5e5;
+  height: 100vh;
+  width: 100%;
+}
+.layout h3 {
+  padding-top: 14px;
+  text-align: center;
+  margin-top: 0px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  font-family: "Work Sans";
+  color: #1b31a8;
+}
+
+.layout h3 .dis {
+  font-weight: 600;
+}
+
+/* Layout container */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.layout-box {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.map-box {
+  flex: 1;
+}
+
+.user-input-box {
+  flex: 1;
+  order: -1;
+}
+
+/* layout-box-container */
+.layout-box-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.layout-box-size {
+  max-width: 80%;
+  margin-left: auto;
+}
+.box1 {
+  align-items: center !important;
+  justify-content: center;
+  display: flex;
+  flex: 1;
+}
+
+.box1 button {
+  width: 141px;
+  height: 62px;
+  left: 505px;
+  top: 262px;
+  border-radius: 32px;
+  color: #ffffff;
+  background-color: #1b31a8;
+  border: 1px solid #1b31a8;
+  cursor: pointer;
+}
+
+.box2 {
+  flex: 1;
+  order: -1;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: -10px;
+}
+
+
+/* input-field */
+.label-text {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 120%;
+  color: #000000;
+}
+.input-field {
+  width: 250px;
+  height: 45px;
+  left: 156px;
+  background: #ffffff;
+  border: 1px solid #dcddec;
+  border-radius: 6px;
+  margin-top: 11px;
+  margin-bottom: 19px;
+  font-weight: 700;
+  font-size: 16px;
+  padding-left: 18px;
+  /* location icon */
+  background-image: url("./icon/location-icon.jpg");
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  background-position: left center;
+  background-color: #ffffff;
+}
+
+input:focus {
+  border-color: #DCDDEC;
+  outline: none;
+}
+
+/* Common Layout */
+.distance-layout {
+  width: 490px;
+  height: 155px;
+  margin-left: 67px;
+}
+.distance-section {
+  width: 100%;
+  height: 45px;
+  border: 1px solid #dcddec;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #000000;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px 0 10px;
+  margin-top: 15px;
+}
+.distance-section h4 {
+  margin-top: 9px;
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 120%;
+}
+.distance-section h5 {
+  margin-top: 4px;
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 120%;
+  color: #0079ff;
+}
+.distance-text {
+  color: #1e2a32;
+  font-weight: 400;
+  font-size: 16px;
+  margin-top: 15px;
+  line-height: 120%;
+  font-family: "Work Sans";
+  font-style: normal;
+}
+
+
+.target-color {
+  color: #1e2a32 !important;
+  font-weight: 700;
+}
+
+/* loading */
+.loading{
+  text-align: center;
+}
+
+/* Mobile screen */
+@media screen and (max-width: 767px) {
+  .layout {
+    background-color: #e5e5e5;
+    height: 100%;
+  }
+  .icon-section {
+    text-align: center;
+    order: -1;
+  }
+  .label-text {
+    display: none;
+  }
+  .layout h3 {
+    display: none;
+  }
+  body {
+    width: 375px;
+    overflow-x: hidden;
+  }
+  .header {
+    display: none;
+  }
+  .layout-box {
+    width: 100%;
+    flex: none;
+  }
+  .map-box {
+    order: -1;
+  }
+  .layout-input-box {
+    width: 100%;
+    flex: none;
+  }
+  .layout-box-size {
+    max-width: 90%;
+    margin: auto;
+  }
+  .input-field {
+    width: 320px;
+    margin-top: 26px;
+    padding-left: 15px;
+    background-image: url("./icon/location-icon.jpg");
+    background-repeat: no-repeat;
+    background-size: 12px 12px;
+    background-position: left center;
+    background-color: #ffffff;
+  }
+  .box1 button {
+    width: 141px;
+    height: 40px;
+  }
+
+  .distance-layout {
+    width: 349px;
+    height: 155px;
+    margin-left: 1px;
+    margin-top: 25px;
+  }
+  .distance-section {
+    width: 88%;
+    margin-left: auto;
+  }
+  .distance-section h4 {
+    font-size: 18px;
+    margin-top: 12px;
+  }
+  .distance-section h5 {
+    margin-top: 9px;
+    font-size: 22px;
+  }
+  .distance-text {
+    padding: 12px 6px 0 35px;
+    margin: auto;
+    font-size: 12px;
+    font-weight: 400;
+  }
+  .target-color {
+    color: #1e2a32 !important;
+    font-weight: 700;
+  }
+}
