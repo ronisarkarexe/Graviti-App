@@ -18,8 +18,8 @@ import Title from "./Title";
 
 // for big screen
 const containerBigScreenStyle = {
-  width: "670px",
-  height: "436px",
+  width: "560px",
+  height: "511px",
 };
 
 // for mobile 375 px
@@ -133,6 +133,8 @@ const Layout = () => {
           </GoogleMap>
         </div>
         <div className="layout-box user-input-box">
+          <div className="test"></div>
+          <div className="test2"></div>
           <>
             <div className="layout-box-container">
               <div className="layout-input-box box2">
@@ -141,7 +143,7 @@ const Layout = () => {
                     <InputLabel props={"Origin"} />
                     <Autocomplete>
                       <input
-                        className="input-field"
+                        className="input-field input-field-icon-1"
                         type="text"
                         name="input-field"
                         maxLength="50"
@@ -149,16 +151,18 @@ const Layout = () => {
                       />
                     </Autocomplete>
                     <InputLabel props={"Stop"} />
+                    <Autocomplete>
                     <input
-                      className="input-field"
+                      className="input-field input-field-icon-2"
                       type="text"
                       name="input-field"
                       maxLength="50"
                     />
+                    </Autocomplete>
                     <InputLabel props={"Destination"} />
                     <Autocomplete>
                       <input
-                        className="input-field"
+                        className="input-field input-field-icon-3 location-d"
                         type="text"
                         name="input-field"
                         maxLength="50"
@@ -176,16 +180,19 @@ const Layout = () => {
                 />
               </div>
             </div>
-            <div className="distance-layout">
-              <CommonLayout distance={distance} distanceName={"Distance"} />
-              <CommonLayout distance={duration} distanceName={"Duration"} />
-              <LayoutText
-                originRef={originRef}
-                destiantionRef={destiantionRef}
-                distance={distance}
-              />
+            <div className="distance-layout-div">
+              <CommonLayout distance={distance}/>
+              <div className="dis-2">
+                <LayoutText
+                  originRef={originRef}
+                  destiantionRef={destiantionRef}
+                  distance={distance}
+                  duration={duration}
+                />
+              </div>
             </div>
           </>
+          <div className="test3"></div>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React from "react";
 
-const LayoutText = ({ originRef, destiantionRef, distance }) => {
+const LayoutText = ({ originRef, destiantionRef, distance, duration }) => {
   return (
     <div className="dis-text">
       <h6 className="distance-text">
@@ -18,7 +18,11 @@ const LayoutText = ({ originRef, destiantionRef, distance }) => {
         </span>{" "}
         via the seleted route is{" "}
         <span className="target-color">
-          {distance === null ? "0" : distance}.
+          {distance === undefined ? "" : distance} 
+        </span>
+        {" "}duration{" "}
+         <span className="target-color">
+          {duration === undefined ? "" : duration}.
         </span>
       </h6>
     </div>

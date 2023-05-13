@@ -1,13 +1,11 @@
 import React from "react";
 
-const CommonLayout = ({distance, distanceName}) => {
+const CommonLayout = ({ distance, distanceName }) => {
   return (
-    <div className="distance-section">
-      <div>
-        <h4>{distanceName}</h4>
-      </div>
-      <div>
-        <h5>{distance === null ? "0" : distance}</h5>
+    <div className="dis-1">
+      <div className="distance-div">
+        <p className="distance-div-1">Distance</p>
+        <p className="distance-div-2">{distance === null ? "0" : distance}</p>
       </div>
     </div>
   );
