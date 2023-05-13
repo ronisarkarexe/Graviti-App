@@ -63,7 +63,7 @@ body {
 
 .map-box {
   flex: 1;
-  margin-right: -89px;
+  /* margin-right: -89px; */
 }
 
 .user-input-box {
