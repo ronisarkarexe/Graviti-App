@@ -59,17 +59,19 @@ const Layout = () => {
   }, []);
 
 
-  // Select transit
-  useEffect(() => {
-    calculateRoute();
-  }, [selectedValue]);
-
 
   // useRef for origin and destination
   /** @type React.MutableRefObject<HTMLInputElement> */
   const originRef = useRef();
   /** @type React.MutableRefObject<HTMLInputElement> */
   const destiantionRef = useRef();
+/** @type React.MutableRefObject<HTMLInputElement> */
+  const stopRef = useRef();
+
+  // Select transit
+  useEffect(() => {
+    calculateRoute();
+  }, [selectedValue, stopRef]);
 
   // loading
   if (!isLoaded) {
@@ -86,9 +88,12 @@ const Layout = () => {
     }
     // eslint-disable-next-line no-undef
     const directionsService = new google.maps.DirectionsService();
+    const waypoints = stopRef?.current?.value ? [{ location: stopRef.current?.value }] : [];
     const results = await directionsService?.route({
       origin: originRef.current?.value,
       destination: destiantionRef.current?.value,
+      waypoints: waypoints,
+      // waypoints: stopRef.current?.value,
       // eslint-disable-next-line no-undef
       travelMode: selectedValue,
     });
@@ -96,7 +101,6 @@ const Layout = () => {
     setDistance(results?.routes[0].legs[0].distance.text);
     setDuration(results?.routes[0].legs[0].duration.text);
   }
-
 
   // select radio option
   const handleRadioChange = (event) => {
@@ -110,6 +114,7 @@ const Layout = () => {
     setDuration("");
     originRef.current.value = "";
     destiantionRef.current.value = "";
+    stopRef.current.value = "";
   }
 
   return (
@@ -157,6 +162,7 @@ const Layout = () => {
                       type="text"
                       name="input-field"
                       maxLength="50"
+                      ref={stopRef}
                     />
                     </Autocomplete>
                     <InputLabel props={"Destination"} />
