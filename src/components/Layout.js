@@ -15,6 +15,7 @@ import InputLabel from "./InputLabel";
 import CommonLayout from "./CommonLayout";
 import LayoutText from "./LayoutText";
 import Title from "./Title";
+import AddStop from "./AddStop";
 
 // for big screen
 const containerBigScreenStyle = {
@@ -43,9 +44,7 @@ const Layout = () => {
 
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [distance, setDistance] = useState("");
-  const [duration, setDuration] = useState("");
   const [selectedValue, setSelectedValue] = useState("DRIVING");
-
 
   // This state for mobile device
   const [width, setWidth] = useState(screen.width);
@@ -58,20 +57,38 @@ const Layout = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // add another stop 
+  const [inputs, setInputs] = useState([{}]);
+  
+  // handle stop
+  const [stops, setStops] = useState([]);
+  const handleAddStop = () => {
+    setStops([...stops, ""]);
+  };
 
+  const handleStopChange = (event, index) => {
+    const newStops = [...stops];
+    newStops[index] = event.target.value;
+    setStops(newStops);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleAddStop();
+    setInputs([...inputs, ""]);
+  };
 
   // useRef for origin and destination
   /** @type React.MutableRefObject<HTMLInputElement> */
   const originRef = useRef();
   /** @type React.MutableRefObject<HTMLInputElement> */
   const destiantionRef = useRef();
-/** @type React.MutableRefObject<HTMLInputElement> */
-  const stopRef = useRef();
+  /** @type React.MutableRefObject<HTMLInputElement> */
 
   // Select transit
   useEffect(() => {
     calculateRoute();
-  }, [selectedValue, stopRef]);
+  }, [selectedValue]);
 
   // loading
   if (!isLoaded) {
@@ -88,18 +105,24 @@ const Layout = () => {
     }
     // eslint-disable-next-line no-undef
     const directionsService = new google.maps.DirectionsService();
-    const waypoints = stopRef?.current?.value ? [{ location: stopRef.current?.value }] : [];
+    const waypoints = stops.length > 0 ? stops.map((stop) => ({ location: stop })) : [];
     const results = await directionsService?.route({
       origin: originRef.current?.value,
       destination: destiantionRef.current?.value,
       waypoints: waypoints,
-      // waypoints: stopRef.current?.value,
       // eslint-disable-next-line no-undef
       travelMode: selectedValue,
     });
+    
+    // total distance calculate
+    let total = 0;
+    for (const key of results?.routes) {
+      for (const value of key?.legs) {
+        total = total + Number(value?.distance?.text.split(' ')[0].replace(/,/g, ""));
+      }
+    }
     setDirectionsResponse(results);
-    setDistance(results?.routes[0].legs[0].distance.text);
-    setDuration(results?.routes[0].legs[0].duration.text);
+    setDistance(total);
   }
 
   // select radio option
@@ -111,10 +134,10 @@ const Layout = () => {
   function clearRoute() {
     setDirectionsResponse(null);
     setDistance("");
-    setDuration("");
+    setStops("")
+    setInputs([{}])
     originRef.current.value = "";
     destiantionRef.current.value = "";
-    stopRef.current.value = "";
   }
 
   return (
@@ -129,7 +152,9 @@ const Layout = () => {
           <GoogleMap
             center={center}
             zoom={15}
-            mapContainerStyle={width < 376 ? containerMobileResStyle : containerBigScreenStyle}
+            mapContainerStyle={
+              width < 376 ? containerMobileResStyle : containerBigScreenStyle
+            }
           >
             <Marker position={center} />
             {directionsResponse && (
@@ -144,38 +169,49 @@ const Layout = () => {
             <div className="layout-box-container">
               <div className="layout-input-box box2">
                 <div className="layout-box-size">
-                  <form>
-                    <InputLabel props={"Origin"} />
-                    <Autocomplete>
-                      <input
-                        className="input-field input-field-icon-1"
-                        type="text"
-                        name="input-field"
-                        maxLength="50"
-                        ref={originRef}
-                      />
-                    </Autocomplete>
-                    <InputLabel props={"Stop"} />
-                    <Autocomplete>
-                    <input
-                      className="input-field input-field-icon-2"
-                      type="text"
-                      name="input-field"
-                      maxLength="50"
-                      ref={stopRef}
-                    />
-                    </Autocomplete>
-                    <InputLabel props={"Destination"} />
-                    <Autocomplete>
-                      <input
-                        className="input-field input-field-icon-3 location-d"
-                        type="text"
-                        name="input-field"
-                        maxLength="50"
-                        ref={destiantionRef}
-                      />
-                    </Autocomplete>
-                  </form>
+                  <>
+                    <div>
+                      <InputLabel props={"Origin"} />
+                      <Autocomplete>
+                        <input
+                          className="input-field input-field-icon-1 origin-text"
+                          type="text"
+                          name="input-field"
+                          maxLength="50"
+                          ref={originRef}
+                        />
+                      </Autocomplete>
+                    </div>
+                    {inputs?.map((input, index) => (
+                      <div key={index}>
+                        <>
+                          <InputLabel props={"Stop"} />
+                          <Autocomplete>
+                            <input
+                              className="input-field input-field-icon-2 stop-text"
+                              type="text"
+                              name="input-field"
+                              maxLength="50"
+                              onBlur={(event) => handleStopChange(event, index)}
+                            />
+                          </Autocomplete>
+                        </>
+                      </div>
+                    ))}
+                    <AddStop handleSubmit={handleSubmit}/>
+                    <div className="input-div">
+                      <InputLabel props={"Destination"} />
+                      <Autocomplete>
+                        <input
+                          className="input-field input-field-icon-3 location-d"
+                          type="text"
+                          name="input-field"
+                          maxLength="50"
+                          ref={destiantionRef}
+                        />
+                      </Autocomplete>
+                    </div>
+                  </>
                 </div>
               </div>
               <div className="layout-input-box box1">
@@ -193,7 +229,6 @@ const Layout = () => {
                   originRef={originRef}
                   destiantionRef={destiantionRef}
                   distance={distance}
-                  duration={duration}
                 />
               </div>
             </div>

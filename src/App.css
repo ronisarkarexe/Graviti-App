@@ -63,7 +63,6 @@ body {
 
 .map-box {
   flex: 1;
-  /* margin-right: -89px; */
 }
 
 .user-input-box {
@@ -127,33 +126,10 @@ label {
   border: 1px solid #dcddec;
   border-radius: 6px;
   margin-top: 15px;
-  margin-bottom: 19px;
+  margin-bottom: 8px;
   font-weight: 700;
   font-size: 16px;
   padding-left: 38px;
-  /* location icon */
-}
-.test{
-  width: 11.35px!important;
-  height: 11.35px!important;
-  background-color: #32CD32;
-  border: 3px solid #000000;
-  border-radius: 50px;
-  position: relative;
-  left: 172px;
-  top: 14.6%;
-  transform: translateY(-50%);
-}
-.test2{
-  width: 5.35px!important;
-  height: 5.35px!important;
-  background-color: #ffffff;
-  border: 5px solid #000000;
-  border-radius: 50px;
-  position: relative;
-  left: 172px;
-  top: 28.7%;
-  transform: translateY(-50%);
 }
 .test3::before {
   position: relative;
@@ -165,13 +141,28 @@ label {
   background-size: contain;
   left: 176px;
   top: 47%;
-  transform: translateY(-3069%);
+  transform: translateY(-2939%);
   background-color: #000000;
 }
-.layout-box-size .input-field .input-field-icon-1{
+.input-field-icon-1{
+  background-image: url("./icon/Ellipse1.png")!important;
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-position: left 16px center;
+}
+
+.input-field-icon-1 .origin-text{
   position: absolute;
 }
-.input-field .input-field-icon-2{
+
+.input-field-icon-2{
+  background-image: url("./icon/Ellipse2.png")!important;
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-position: left 16px center;
+}
+
+.input-field-icon-2 .stop-text{
   position: absolute;
 }
 .input-field-icon-3{
@@ -308,6 +299,17 @@ input:focus {
   text-align: center;
 }
 
+.input-div{
+  margin-top: 30px;
+}
+
+.btn-add-stop button{
+  float: right;
+  border: none;
+  background-color: #f4f8fa;
+  cursor: pointer;
+}
+
 /* Mobile screen */
 @media screen and (max-width: 767px) {
   .layout {
@@ -399,7 +401,7 @@ input:focus {
   }
   .test3::before {
     left: 35px;
-    transform: translateY(-3572%);
+    transform: translateY(-3442%);
   }
   .input-field-icon-3{
     background-position: left 12px center;
